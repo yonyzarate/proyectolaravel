@@ -76,6 +76,25 @@
     <script src="{{asset('js/Chart.min.js')}}"></script>
     <!-- GenesisUI main scripts -->
     <script src="{{asset('js/template.js')}}"></script>
+
+    <script>
+        // Editar categoria en venta modal
+        $('#abrirmodalEditar').on('show.bs.modal',function(event){
+        //  console.log('modal abierto');   
+        var button = $(event.relatedTarget)
+        var nombre_modal_editar = button.data('nombre')
+        var descripcion_modal_editar = button.data('descripcion')
+        var id_categoria = button.data('id_categoria')
+        var modal = $(this)
+
+        modal.find('.modal-body #nombre').val(nombre_modal_editar);
+        modal.find('.modal-body #descripcion').val(descripcion_modal_editar);
+        modal.find('.modal-body #id_categoria').val(id_categoria);
+
+
+        }) 
+
+    </script>
 </body>
 
 </html>
