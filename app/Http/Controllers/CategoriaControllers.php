@@ -48,14 +48,14 @@ class CategoriaControllers extends Controller
     public function destroy(Request $request)
     {
         $categoria = Categoria::findOrFail($request->id_categoria);
-        if ($cartegoria->condicion == "1") {
+        if ($categoria->condicion == "1") {
             
-            $cartegoria->condicion ='0';
-            $cartegoria-> save();
+            $categoria->condicion ='0';
+            $categoria-> save();
             return Redirect::to("categoria");
         }else{
-            $cartegoria->condicion ='1';
-            $cartegoria-> save();
+            $categoria->condicion ='1';
+            $categoria-> save();
             return Redirect::to("categoria");
         }
     }

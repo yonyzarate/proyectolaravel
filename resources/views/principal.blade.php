@@ -90,9 +90,17 @@
         modal.find('.modal-body #nombre').val(nombre_modal_editar);
         modal.find('.modal-body #descripcion').val(descripcion_modal_editar);
         modal.find('.modal-body #id_categoria').val(id_categoria);
-
-
         }) 
+
+        // INICIO ventana modal para cambiar estado de la Categoria 
+        $('#cambiarEstado').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget)
+            var id_categoria = button.data('id_categoria')
+            var modal = $(this)
+
+            modal.find('.modal-body #id_categoria').val(id_categoria);
+        })
+        // FIN ventana modal para cambiar estado de la Categoria
 
     </script>
 </body>
