@@ -89,12 +89,12 @@
                             <td>
                                 @if ($prod->condicion)
                                     <button type="button" class="btn btn-danger btn-sm"
-                                    data-id_categoria="{{$prod->id}}" data-toggle="modal" data-target="#cambiarEstado">
+                                    data-id_producto="{{$prod->id}}" data-toggle="modal" data-target="#cambiarEstado">
                                         <i class="fa fa-times fa-2x"></i> Desactivar
                                     </button>
                                 @else
                                     <button type="button" class="btn btn-success btn-sm"
-                                    data-id_categoria="{{$prod->id}}" data-toggle="modal" data-target="#cambiarEstado">
+                                    data-id_producto="{{$prod->id}}" data-toggle="modal" data-target="#cambiarEstado">
                                         <i class="fa fa-lock fa-2x"></i> Activar
                                     </button>
                                 @endif
