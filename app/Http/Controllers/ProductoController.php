@@ -30,8 +30,8 @@ class ProductoController extends Controller
             ->select('id','nombre','descripcion')
             ->where('condicion','=','1')->get();
 
-            return $productos;
-            // return view('producto.index',["productos"=>$productos,"categorias"=>$categorias,"buscarTexto"=>$sql]);
+            // return $productos;
+            return view('producto.index',["productos"=>$productos,"categorias"=>$categorias,"buscarTexto"=>$sql]);
         }
     } 
 
