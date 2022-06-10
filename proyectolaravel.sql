@@ -22,5 +22,6 @@ CREATE TABLE productos (
     precio_venta DECIMAL(11,2),categorias
     stock INT(20) NOT NULL,
     condicion TINYINT DEFAULT '1',
+    imagen VARCHAR(300)NULL,
     CONSTRAINT FK_categoria_Producto FOREIGN KEY (idcategoria) REFERENCES categorias (id)
 )ENGINE=INNODB DEFAULT CHARSET=Latin1; 

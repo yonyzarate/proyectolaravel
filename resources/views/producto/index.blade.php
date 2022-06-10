@@ -37,6 +37,7 @@
                             <th>Codigo</th>
                             <th>P.Venta(USD$)</th>
                             <th>Stock</th>
+                            <th>Imagen</th>
                             <th>Estado</th>
                             <th>Editar</th>
                             <th>Cambiar Estado</th>
@@ -51,6 +52,11 @@
                             <td>{{$prod->codigo}}</td>
                             <td>{{$prod->precio_venta}}</td>
                             <td>{{$prod->stock}}</td>
+                            <td>
+                                <img src="{{asset('storage/img/producto/'.$prod->imagen)}}" 
+                                id="imagen1" alt ="{{$prod->nombre}}" class="img-responsive"
+                                width="100px" height="100px">
+                            </td>
                             <td>
                                 @if ($prod->condicion == "1")
                                     
@@ -117,7 +123,7 @@
                
                 <div class="modal-body">
                                         
-                    <form action="{{route('producto.store')}}" method="post"  class="form-horizontal">
+                    <form action="{{route('producto.store')}}" method="post"  class="form-horizontal" enctype="multipart/form-data">
                         {{csrf_field()}}
                         @include('producto.form')
                     </form>
@@ -142,7 +148,7 @@
                
                 <div class="modal-body">
                                         
-                    <form action="{{route('producto.update','test')}}" method="post"  class="form-horizontal">
+                    <form action="{{route('producto.update','test')}}" method="post"  class="form-horizontal" enctype="multipart/form-data">
                         {{method_field('patch')}}
                         {{csrf_field()}}
                         <input type="hidden" name="id_producto" id="id_producto" value="">
