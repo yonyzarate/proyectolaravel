@@ -51,27 +51,30 @@ class ProductoController extends Controller
     // UPDATE ES PARA PODER ACTUALIZAR UN REGISTRO DE CATEGORIA 
     public function update(Request $request)
     {
-        $categoria = Categoria::findOrFail($request->id_categoria);
-        $categoria -> nombre = $request->nombre;
-        $categoria -> descripcion = $request->descripcion;
-        $categoria -> condicion = '1';
-        $categoria -> save();
-        return Redirect::to("categoria");
+        $producto = Producto::findOrFail($request->id_producto);
+        $producto -> idcategoria = $request->id;
+        $producto -> codigo = $request->codigo;
+        $producto -> nombre = $request->nombre;
+        $producto -> precio_venta = $request->precio_venta;
+        $producto -> stock = '0';
+        $producto -> condicion = '1';
+        $producto -> save();
+        return Redirect::to("producto");
     }
 
     // DESTROY ES PARA PODER CAMBIARS EL ESTADO DE UN REGISTRO 
     public function destroy(Request $request)
     {
-        $categoria = Categoria::findOrFail($request->id_categoria);
-        if ($categoria->condicion == "1") {
+        $producto = Producto::findOrFail($request->id_producto);
+        if ($producto->condicion == "1") {
             
-            $categoria->condicion ='0';
-            $categoria-> save();
-            return Redirect::to("categoria");
+            $producto->condicion ='0';
+            $producto-> save();
+            return Redirect::to("producto");
         }else{
-            $categoria->condicion ='1';
-            $categoria-> save();
-            return Redirect::to("categoria");
+            $producto->condicion ='1';
+            $producto-> save();
+            return Redirect::to("producto");
         }
     }
 }
