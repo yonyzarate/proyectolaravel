@@ -4,7 +4,7 @@
         <select class="form-control" id="id" name="id" required>
             <option value="0" disabled>Seleccione</option>
             @foreach($categorias as $cat)
-                <option value="{{$cat->id}}">{{$cat->nambre}}</option>
+                <option value="{{$cat->id}}">{{$cat->nombre}}</option>
             @endforeach
         </select>
     </div>
