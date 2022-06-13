@@ -28,17 +28,19 @@
                         {{csrf_field()}}
                         </form>
                     </li>
-                      
-            
+
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i> Compras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-users"></i> Proveedores</a>
+                        <a class="nav-link" href="{{url('proveedor')}}" onclick="event.preventDefault();
+                        document.getElementById('proveedor-form').submit();"><i class="fa fa-list"></i> Proveedor</a>
+                        <form id="proveedor-form" action="{{url('proveedor')}}" method="GET" style="display: none;">
+                        {{csrf_field()}}
+                        </form>
                     </li>
-                       
-                   
+
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fa fa-suitcase"></i> Ventas</a>
                     </li>
