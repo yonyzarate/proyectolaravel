@@ -25,3 +25,14 @@ CREATE TABLE productos (
     imagen VARCHAR(300)NULL,
     CONSTRAINT FK_categoria_Producto FOREIGN KEY (idcategoria) REFERENCES categorias (id)
 )ENGINE=INNODB DEFAULT CHARSET=Latin1; 
+
+CREATE TABLE proveedores (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    tipo_documento VARCHAR(20) NULL,
+    num_documento VARCHAR(20) NULL,
+    direccion VARCHAR(70) NULL,
+    telefono VARCHAR(20) NULL,
+    email VARCHAR(50) NULL,
+	condicion TINYINT DEFAULT '1' 
+)ENGINE=INNODB DEFAULT CHARSET=Latin1;
