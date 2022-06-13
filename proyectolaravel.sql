@@ -33,6 +33,5 @@ CREATE TABLE proveedores (
     num_documento VARCHAR(20) NULL,
     direccion VARCHAR(70) NULL,
     telefono VARCHAR(20) NULL,
-    email VARCHAR(50) NULL,
-	condicion TINYINT DEFAULT '1' 
+    email VARCHAR(50) NULL
 )ENGINE=INNODB DEFAULT CHARSET=Latin1;
