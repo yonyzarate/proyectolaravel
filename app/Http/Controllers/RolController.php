@@ -18,8 +18,8 @@ class RolController extends Controller
             $roles = DB::table('roles')->where('nombre','LIKE','%'.$sql.'%')
             ->orderBy('id','desc')
             ->paginate(3);
-            return $roles;
-            // return view('rol.index',["roles"=>$roles,"buscarTexto"=>$sql]);
+            // return $roles;
+            return view('rol.index',["roles"=>$roles,"buscarTexto"=>$sql]);
         }
     }
 }
