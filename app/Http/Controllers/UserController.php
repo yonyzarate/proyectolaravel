@@ -37,8 +37,8 @@ class UserController extends Controller
             ->select('id','nombre','descripcion')
             ->where('condicion','=','1')->get();
 
-            return $usuarios;
-            // return view('user.index',["usuarios"=>$usuarios,"roles"=>$roles,"buscarTexto"=>$sql]);
+            // return $usuarios;
+            return view('user.index',["usuarios"=>$usuarios,"roles"=>$roles,"buscarTexto"=>$sql]);
         }
     }
     
@@ -95,7 +95,7 @@ class UserController extends Controller
         $user -> email = $request->email;
         $user -> direccion = $request->direccion;
         $user -> usuario = $request->usuario;
-        $user -> passwor = bcrypt($request->usuario);
+        $user -> passwor = bcrypt($request->password);
         $user -> condicion = '1';
         $user -> idrol = $request->id_rol;
 
