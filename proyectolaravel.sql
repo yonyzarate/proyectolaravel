@@ -35,3 +35,13 @@ CREATE TABLE proveedores (
     telefono VARCHAR(20) NULL,
     email VARCHAR(50) NULL
 )ENGINE=INNODB DEFAULT CHARSET=Latin1;
+
+CREATE TABLE clientes (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NULL,
+    tipo_documento VARCHAR(20) NULL,
+    num_documento VARCHAR(20) NULL,
+    direccion VARCHAR(70) NULL,
+    telefono VARCHAR(20) NULL,
+    email VARCHAR(50) NULL
+)ENGINE=INNODB DEFAULT CHARSET=Latin1;
