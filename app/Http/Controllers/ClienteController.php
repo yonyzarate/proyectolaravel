@@ -36,7 +36,7 @@ class ClienteController extends Controller
         $clientes -> telefono = $request->telefono;
         $clientes -> email = $request->email;
         $clientes -> save();
-        return Redirect::to("clientes");
+        return Redirect::to("cliente");
     }
 // UPDATE ES PARA PODER ACTUALIZAR UN REGISTRO DE CLIENTES 
     public function update(Request $request)
@@ -49,6 +49,6 @@ class ClienteController extends Controller
         $clientes -> telefono = $request->telefono;
         $clientes -> email = $request->email;
         $clientes -> save();
-        return Redirect::to("clientes");
+        return Redirect::to("cliente");
     }
 }
