@@ -46,7 +46,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-users"></i> Clientes</a>
+                        <a class="nav-link" href="{{url('cliente')}}" onclick="event.preventDefault();
+                        document.getElementById('cliente-form').submit();"><i class="fa fa-list"></i> Cliente</a>
+                        <form id="cliente-form" action="{{url('cliente')}}" method="GET" style="display: none;">
+                        {{csrf_field()}}
+                        </form>
                     </li>
                         
                     
