@@ -20,3 +20,4 @@ Route:: resource('producto','ProductoController');
 Route:: resource('proveedor','ProveedorController');
 Route:: resource('cliente','ClienteController');
 Route:: resource('rol','RolController');
+Route:: resource('usuario','UserController');

@@ -11,7 +11,7 @@ use DB;
 class ProductoController extends Controller
 {
     // LA FUNCION INDEX TRABAJA PARA TRAER 
-    // LA LISTA DE CARTEGORTIAS 
+    // LA LISTA DE PRODUCTO 
     public function index(Request $request)
     {
         //
@@ -35,7 +35,7 @@ class ProductoController extends Controller
         }
     } 
 
-    // STOER ES UNA FUNCION PARA GUARDAR UNA NUEVA CATEGORIA
+    // STOER ES UNA FUNCION PARA GUARDAR UNA NUEVA PRODUCTO
     public function store(Request $request)
     {
         $producto = new Producto();
