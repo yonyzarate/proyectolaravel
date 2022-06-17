@@ -50,9 +50,9 @@ class UserController extends Controller
         $user -> nombre = $request->nombre;
         $user -> tipo_documento = $request->tipo_documento;
         $user -> num_documento = $request->num_documento;
+        $user -> direccion = $request->direccion;
         $user -> telefono = $request->telefono;
         $user -> email = $request->email;
-        $user -> direccion = $request->direccion;
         $user -> usuario = $request->usuario;
         $user -> passwor = bcrypt($request->usuario);
         $user -> condicion = '1';
@@ -79,8 +79,8 @@ class UserController extends Controller
         }else {
             $filenameToStore = "noimagen.jpg";
         }
-        $producto -> imagen = $filenameToStore;
-        $producto -> save();
+        $user -> imagen = $filenameToStore;
+        $user -> save();
         return Redirect::to("usuario");
     }    
 
@@ -91,9 +91,9 @@ class UserController extends Controller
         $user -> nombre = $request->nombre;
         $user -> tipo_documento = $request->tipo_documento;
         $user -> num_documento = $request->num_documento;
+        $user -> direccion = $request->direccion;
         $user -> telefono = $request->telefono;
         $user -> email = $request->email;
-        $user -> direccion = $request->direccion;
         $user -> usuario = $request->usuario;
         $user -> passwor = bcrypt($request->password);
         $user -> condicion = '1';
@@ -114,7 +114,7 @@ class UserController extends Controller
             // Obtener solo nombre de archivo
             $filename = pathinfo($filenamewidthExt, PATHINFO_FILENAME);
 
-            // Obtener solo extencion del archivo
+            // Obtener solo extencion del arc hivo
             $extension =  $request->file('imagen')->guessClientExtension();
 
             // Nombre del archivo para almacenar 

@@ -9,7 +9,7 @@
     <label class="col-md-3 form-control-label" for="dir">Dirección</label>
     <div class="col-md-9">
         <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese la dirección"
-        required pattern="^[a-z-A-Z_áéíóúñ\s]{0,200}$">
+        pattern="^[a-z-A-Z_áéíóúñ\s]{0,200}$">
     </div>
 </div>
 <div class="form-group row">
