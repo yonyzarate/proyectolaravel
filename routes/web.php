@@ -21,3 +21,7 @@ Route:: resource('proveedor','ProveedorController');
 Route:: resource('cliente','ClienteController');
 Route:: resource('rol','RolController');
 Route:: resource('usuario','UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
