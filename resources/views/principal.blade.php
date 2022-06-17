@@ -56,7 +56,16 @@
 
     <div class="app-body">
 
-    @include("plantilla.sidebar")
+    @if(Auth::check())
+        @if(Auth::user()->idrole == 1)
+            @include('plantilla.sidebaradministrador')
+        @elseif(Auth::user()->idrole == 2)
+            @include('plantilla.sidebarvendedor')    
+        @elseif(Auth::user()->idrole == 3)
+            @include('plantilla.sidebarcomprador')
+        @else 
+        @endif
+    @endif   
         <!-- Contenido Principal -->
     @yield("contenido")
         <!-- /Fin del contenido principal -->

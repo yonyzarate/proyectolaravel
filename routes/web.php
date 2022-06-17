@@ -10,18 +10,46 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('principal');
+// ruta de acceso a los invitados 
+Route::group(['middleware'=>['guest']],function(){
+    Route::get('/', 'Auth\LoginController@showLoginForm');
+    Route::post('/login', 'Auth\LoginController@login')->name('login');
 });
 
-Route:: resource('categoria','CategoriaControllers');
-Route:: resource('producto','ProductoController');
-Route:: resource('proveedor','ProveedorController');
-Route:: resource('cliente','ClienteController');
-Route:: resource('rol','RolController');
-Route:: resource('usuario','UserController');
+// ruta de acceso a los usuarios que estan autenticados
+Route::group(['middleware'=>['auth']],function(){
+    Route::get('/home', 'HomeController@index');
+    // rutas a donde el comprador puede acceder
+    Route::group(['middleware'=>['Comprador']],function(){
+        Route:: resource('categoria','CategoriaControllers');
+        Route:: resource('producto','ProductoController');
+        Route:: resource('proveedor','ProveedorController');
+    });
 
-Auth::routes();
+    // rutas a donde el vendedor puede acceder
+    Route::group(['middleware'=>['Vendedor']],function(){
+        Route:: resource('categoria','CategoriaControllers');
+        Route:: resource('producto','ProductoController');
+        Route:: resource('cliente','ClienteController');
+    });
 
-Route::get('/home', 'HomeController@index')->name('home');
+    // rutas a donde el administrador puede acceder
+    Route::group(['middleware'=>['Administrador']],function(){
+        Route:: resource('categoria','CategoriaControllers');
+        Route:: resource('producto','ProductoController');
+        Route:: resource('proveedor','ProveedorController');
+        Route:: resource('cliente','ClienteController');
+        Route:: resource('rol','RolController');
+        Route:: resource('usuario','UserController');
+    });
+
+    
+
+    
+});
+
+
+
+
+
+

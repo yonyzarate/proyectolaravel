@@ -25,7 +25,7 @@ class UserController extends Controller
             $usuarios = DB::table('users as u')
             ->join('roles as r', 'u.idrol','=','r.id')
             ->select('u.id','u.nombre','u.tipo_documento','u.num_documento',
-            'u.direccion','u.telefono','u.email','u.usuario','u.passwor',
+            'u.direccion','u.telefono','u.email','u.usuario','u.password',
             'u.condicion','u.idrol','u.imagen','r.nombre as rol')
             ->where('u.nombre','LIKE','%'.$sql.'%')
             ->orwhere('u.num_documento','LIKE','%'.$sql.'%')
@@ -54,7 +54,7 @@ class UserController extends Controller
         $user -> telefono = $request->telefono;
         $user -> email = $request->email;
         $user -> usuario = $request->usuario;
-        $user -> passwor = bcrypt($request->usuario);
+        $user -> password = bcrypt($request->password);
         $user -> condicion = '1';
         $user -> idrol = $request->id_rol;
 

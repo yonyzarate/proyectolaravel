@@ -1,23 +1,18 @@
-@extends('layouts.app')
+@extends('principal')
+@section('contenido')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a href="/">BACKEND - SISTEMA DE COMPRAS - VENTAS</a></li>
+    </ol>
+    <div class="container-fluid">
+        <!-- Ejemplo de tabla Listado -->
+       HOME
+        <!-- Fin ejemplo de tabla Listado -->
     </div>
-</div>
+</main>
+
+
+
 @endsection
