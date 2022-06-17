@@ -62,10 +62,35 @@ CREATE TABLE users (
     telefono VARCHAR(20) NULL,
     email VARCHAR(50) NULL,
     usuario VARCHAR(50) UNIQUE NOT NULL,
-    passwor VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     condicion TINYINT DEFAULT '1',
     idrol INT(11) NOT NULL,
     imagen VARCHAR(300) NULL,
     remember_token VARCHAR(100) NULL,
     CONSTRAINT FK_rol_users FOREIGN KEY (idrol) REFERENCES roles (id)
- )ENGINE=INNODB DEFAULT CHARSET=Latin1;
+)ENGINE=INNODB DEFAULT CHARSET=Latin1;
+
+CREATE TABLE compras (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    idproveedor INT(11) NOT NULL,
+    idusuario INT(11) NOT NULL,
+    tipo_identificacion VARCHAR(20) NULL,
+    num_compra VARCHAR(10) NULL,
+    fecha_compra DATETIME NULL,
+    impuesto DECIMAL(4,2) NULL,
+    total DECIMAL(11,2) NULL,
+    estado VARCHAR(20)NULL,
+    CONSTRAINT FK_proveedor_compras FOREIGN KEY (idproveedor) REFERENCES proveedores (id),
+    CONSTRAINT FK_usuario_compras FOREIGN KEY (idusuario) REFERENCES users (id)
+)ENGINE=INNODB DEFAULT CHARSET=Latin1; 
+
+
+CREATE TABLE detalle_compras (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    idcompra INT(11) NOT NULL,
+    idproducto INT(11) NOT NULL,
+    cantidad INT(11) NULL,
+    precio DECIMAL(11,2) NULL,
+    CONSTRAINT FK_compas_Dcompras FOREIGN KEY (idcompra) REFERENCES compras (id),
+    CONSTRAINT FK_producto_Dcompras FOREIGN KEY (idproducto) REFERENCES productos (id)
+)ENGINE=INNODB DEFAULT CHARSET=Latin1; 
