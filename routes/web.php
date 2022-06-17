@@ -29,6 +29,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('categoria','CategoriaControllers');
         Route:: resource('producto','ProductoController');
         Route:: resource('proveedor','ProveedorController');
+        Route:: resource('compra','CompraController');
     });
 
     // rutas a donde el vendedor puede acceder
@@ -46,6 +47,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('cliente','ClienteController');
         Route:: resource('rol','RolController');
         Route:: resource('usuario','UserController');
+        Route:: resource('compra','CompraController');
     });
 
     
