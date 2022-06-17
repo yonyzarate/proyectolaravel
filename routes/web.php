@@ -19,6 +19,11 @@ Route::group(['middleware'=>['guest']],function(){
 // ruta de acceso a los usuarios que estan autenticados
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/home', 'HomeController@index');
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    
+    // Route::get('/main', function(){
+    //     return view('contenido/contenido');
+    // })->name('main');
     // rutas a donde el comprador puede acceder
     Route::group(['middleware'=>['Comprador']],function(){
         Route:: resource('categoria','CategoriaControllers');
