@@ -35,8 +35,8 @@ class CompraController extends Controller
             // ->select('id','nombre','descripcion')
             // ->where('condicion','=','1')->get();
 
-            return $compras;
-            // return view('compra.index',["compras"=>$compras,"buscarTexto"=>$sql]);
+            // return $compras;
+            return view('compra.index',["compras"=>$compras,"buscarTexto"=>$sql]);
         }
     } 
     public function create(){
