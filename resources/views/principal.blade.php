@@ -235,6 +235,24 @@
 
             modal.find('.modal-body #id_usuario').val(id_usuario);
         })
+        // Fin ventana modal para cambiar el estado de USUARIO
+
+        $('#CambiarEstadoCompra').on('show.bs.modal',function(event){
+            var button = $(event.relatedTarget)
+            var id_compra = button.data('id_compra')
+            var modal = $(this)
+
+            modal.find('.modal-body #id_compra').val(id_compra);
+        })
+
+
+
+
+
+
+
+
+
 
 
 
