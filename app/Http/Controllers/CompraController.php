@@ -8,6 +8,7 @@ use DB;
 use Carbon\Carbon;
 use App\Compra;
 use App\DetalleCompra;
+use Illuminate\Support\Facades\Redirect;
 
 class CompraController extends Controller
 {
@@ -28,7 +29,7 @@ class CompraController extends Controller
             ->orderby('co.id','desc')
             ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
             'co.impuesto','co.estado','co.total','pro.nombre','us.nombre')
-            ->paginate(8);
+            ->paginate(1);
             
             // /* listar las carateristicas en ventana modal*/
             // $categorias = DB::table('categorias')
@@ -59,12 +60,12 @@ class CompraController extends Controller
             $mytime = Carbon::now('America/La_Paz');
 
             $compra = new Compra();
-            $compra->idproveedor = $request->idproveedor;
+            $compra->idproveedor = $request->id_proveedor;
             $compra->idusuario = \Auth::user()->id;
             $compra->tipo_identificacion = $request->tipo_identificacion;
             $compra->num_compra = $request->num_compra;
             $compra->fecha_compra = $mytime->toDateString();
-            $compra->num_compra = '0.20';
+            $compra->impuesto = '0.20';
             $compra->total = $request->total_pagar;
             $compra->estado = 'Registrado';
             $compra->save();

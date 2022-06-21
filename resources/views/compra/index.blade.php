@@ -12,10 +12,11 @@
             <div class="card-header">
 
                 <h2>Listado de Compras</h2><br/>
-                <a href="compra/create"> </a>
+                <a href="compra/create"> 
                 <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#abrirmodal">
                     <i class="fa fa-plus fa-2x"></i>&nbsp;&nbsp;Agregar Categoría
                 </button>
+                </a>
             </div>
             <div class="card-body">
                 <div class="form-group row">
@@ -38,11 +39,11 @@
                             <th>Proveedor</th>
                             <th>Tipo Identificación</th>
                             <th>Comprador</th>
-                            <th>Total(USD$)</th>
-                            <th>Impuestos</th>
+                            <th>Total (USD$)</th>
+                            <th>Impuesto</th>
                             <th>Estado</th>
                             <th>Cambiar Estado</th>
-                            <th>Descargar Reporte</th>
+                            <th>Reporte</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +52,7 @@
                             
                             <td>
                                 <a href="{{URL::action('CompraController@show',$comp->id)}}">
-                                    <button type="button" class="btn btn-warning btn-md">
+                                    <button type="button" class="btn btn-warning btn-sm">
                                         <i class="fa fa-eye fa-2x"></i> Ver detalle
                                     </button> &nbsp;
                                 </a>
@@ -97,7 +98,7 @@
                             <td>
                                 <a href="{{url('pdfCompra',$comp->id)}}" target="_blank">
                                     <button type="button" class="btn btn-info btn-md">
-                                        <i class="fa fa-file fa-2x"></i>Descargar PDF
+                                        <i class="fa fa-file fa-2x"></i>PDF
                                     </button> &nbsp;
                                 </a>
                             </td>

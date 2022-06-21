@@ -85,6 +85,7 @@
     <script src="{{asset('js/Chart.min.js')}}"></script>
     <!-- GenesisUI main scripts -->
     <script src="{{asset('js/template.js')}}"></script>
+    <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
     <script>
         // Editar categoria en venta modal
@@ -234,6 +235,111 @@
 
             modal.find('.modal-body #id_usuario').val(id_usuario);
         })
+
+
+
+        // ****************************************************************
+        $(document).ready(function(){
+     
+     $("#agregar").click(function(){
+
+         agregar();
+     });
+
+  });
+
+   var cont=0;
+   total=0;
+   subtotal=[];
+   $("#guardar").hide();
+
+     function agregar(){
+
+          id_producto= $("#id_producto").val();
+          producto= $("#id_producto option:selected").text();
+          cantidad= $("#cantidad").val();
+          precio_compra= $("#precio_compra").val();
+          impuesto=20;
+        
+          
+          if(id_producto !="" && cantidad!="" && cantidad>0 && precio_compra!=""){
+            
+             subtotal[cont]=cantidad*precio_compra;
+             total= total+subtotal[cont];
+             
+             var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times fa-2x"></i></button></td> <td><input type="hidden" name="id_producto[]" value="'+id_producto+'">'+producto+'</td> <td><input type="number" id="precio_compra[]" name="precio_compra[]"  value="'+precio_compra+'"> </td>  <td><input type="number" name="cantidad[]" value="'+cantidad+'"> </td> <td>$'+subtotal[cont]+' </td></tr>';
+             cont++;
+             limpiar();
+             totales();
+            
+             evaluar();
+             $('#detalles').append(fila);
+            
+            }else{
+
+               // alert("Rellene todos los campos del detalle de la compra, revise los datos del producto");
+               
+                Swal.fire({
+                type: 'error',
+                //title: 'Oops...',
+                text: 'Rellene todos los campos del detalle de la compras',
+              
+                })
+            
+            }
+         
+     }
+
+    
+     function limpiar(){
+        
+        $("#cantidad").val("");
+        $("#precio_compra").val("");
+        
+
+     }
+
+     function totales(){
+
+        $("#total").html("USD$ " + total.toFixed(2));
+
+        total_impuesto=total*impuesto/100;
+        total_pagar=total+total_impuesto;
+        $("#total_impuesto").html("USD$ " + total_impuesto.toFixed(2));
+        $("#total_pagar_html").html("USD$ " + total_pagar.toFixed(2));
+        $("#total_pagar").val(total_pagar.toFixed(2));
+        
+     }
+
+
+
+     function evaluar(){
+
+         if(total>0){
+
+           $("#guardar").show();
+
+         } else{
+              
+           $("#guardar").hide();
+         }
+     }
+
+     function eliminar(index){
+
+        total=total-subtotal[index];
+        total_impuesto= total*20/100;
+        total_pagar_html = total + total_impuesto;
+       
+        $("#total").html("USD$" + total);
+        $("#total_impuesto").html("USD$" + total_impuesto);
+        $("#total_pagar_html").html("USD$" + total_pagar_html);
+        $("#total_pagar").val(total_pagar_html.toFixed(2));
+       
+        $("#fila" + index).remove();
+        evaluar();
+     }
+
     </script>
 </body>
 
