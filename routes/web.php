@@ -48,6 +48,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('rol','RolController');
         Route:: resource('usuario','UserController');
         Route:: resource('compra','CompraController');
+        Route:: get('/pdfCompra/{id}','CompraController@pdf')->name('compra_pdf');
     });
 
     

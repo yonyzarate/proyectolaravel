@@ -6,13 +6,15 @@
         "framework",
         "laravel"
     ],
-    "license": "MIT",
+    "license": "MIT", 
     "require": {
         "php": "^7.1.3",
+        "barryvdh/laravel-dompdf": "0.8.4",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "5.8"
+        "laravelcollective/html": "5.8",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

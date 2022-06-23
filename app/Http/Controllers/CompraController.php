@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Compra;
 use App\DetalleCompra;
 use Illuminate\Support\Facades\Redirect;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CompraController extends Controller
 {
@@ -106,7 +107,10 @@ class CompraController extends Controller
         ->select('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
         'co.impuesto','co.estado',DB::raw('sum(dc.cantidad*precio) as total'),'pro.nombre')
         ->where('co.id','=',$id)
-        ->orderby('co.id','desc')->first();
+        ->orderby('co.id','desc')
+        ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
+        'co.impuesto','co.estado','pro.nombre')
+        ->first();
 
         // mostrar detalles de
         $detalles = DB::table('detalle_compras as dc')
@@ -124,6 +128,37 @@ class CompraController extends Controller
         $compra-> estado = 'Anulado';
         $compra-> save();
         return Redirect::to('compra');
+
+    }
+
+    public function pdf(Request $request, $id){
+        $compra = DB::table('compras as co')
+        ->join('proveedores as pro','pro.id','=','co.idproveedor')
+        ->join('users as us','us.id','=','co.idusuario')
+        ->join('detalle_compras as dl','co.id','=','dl.idcompra')
+        ->select('co.id','co.tipo_identificacion','co.num_compra','co.created_at',
+        'co.impuesto',DB::raw('sum(dl.cantidad*precio) as total'),
+        'co.estado','pro.nombre','pro.tipo_documento','pro.num_documento',
+        'pro.direccion','pro.email','pro.telefono','us.usuario')
+        ->where('co.id','=',$id)
+        ->orderBy('co.id','desc')
+        ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.created_at',
+        'co.impuesto','co.estado','pro.nombre','pro.tipo_documento','pro.num_documento',
+        'pro.direccion','pro.email','pro.telefono','us.usuario')
+        ->take(1)->get();
+
+        $detalles = DB::table('detalle_compras as dl')
+        ->join('productos as prod','prod.id','=','dl.idproducto')
+        ->select('dl.cantidad','dl.precio','prod.nombre as producto')
+        ->where('dl.idcompra','=',$id)
+        ->orderBy('dl.id','desc')->get();
+
+        $numcompra =Compra::select('num_compra')->where('id',$id)->get();
+
+        $pdf = \PDF::loadView('pdf.compra',['compra'=>$compra,'detalles'=>$detalles]);
+        return $pdf->download('compra-'.$numcompra[0]->num_compra.'.pdf');
+        
+        
 
     }
 
