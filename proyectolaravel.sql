@@ -94,3 +94,29 @@ CREATE TABLE detalle_compras (
     CONSTRAINT FK_compas_Dcompras FOREIGN KEY (idcompra) REFERENCES compras (id),
     CONSTRAINT FK_producto_Dcompras FOREIGN KEY (idproducto) REFERENCES productos (id)
 )ENGINE=INNODB DEFAULT CHARSET=Latin1; 
+
+CREATE TABLE ventas (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    idcliente INT(11) NOT NULL,
+    idusuario INT(11) NOT NULL,
+    tipo_identificacion VARCHAR(20) NULL,
+    num_venta VARCHAR(10) NULL,
+    fecha_venta DATETIME NULL,
+    impuesto DECIMAL(4,2) NULL,
+    total DECIMAL(11,2) NULL,
+    estado VARCHAR(20)NULL,
+    CONSTRAINT FK_cliente_ventas FOREIGN KEY (idcliente) REFERENCES clientes (id),
+    CONSTRAINT FK_usuario_ventas FOREIGN KEY (idusuario) REFERENCES users (id)
+)ENGINE=INNODB DEFAULT CHARSET=Latin1; 
+
+
+CREATE TABLE detalle_ventas (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    idventa INT(11) NOT NULL,
+    idproductoo INT(11) NOT NULL,
+    cantidad INT(11) NULL,
+    precio DECIMAL(11,2) NULL,
+    descuento DECIMAL(11,2) NULL,
+    CONSTRAINT FK_venta_Dcompras FOREIGN KEY (idventa) REFERENCES ventas (id),
+    CONSTRAINT FK_producto_Dcompras FOREIGN KEY (idproducto) REFERENCES productos (id)
+)ENGINE=INNODB DEFAULT CHARSET=Latin1; 
