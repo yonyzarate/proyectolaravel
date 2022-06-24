@@ -35,8 +35,8 @@ class VentaController extends Controller
             // ->select('id','nombre','descripcion')
             // ->where('condicion','=','1')->get();
 
-            return $ventas;
-            // return view('venta.index',["ventas"=>$ventas,"buscarTexto"=>$sql]);
+            // return $ventas;
+            return view('venta.index',["ventas"=>$ventas,"buscarTexto"=>$sql]);
         }
     } 
     public function create(){
