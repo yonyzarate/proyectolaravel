@@ -37,6 +37,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('categoria','CategoriaControllers');
         Route:: resource('producto','ProductoController');
         Route:: resource('cliente','ClienteController');
+        Route:: resource('venta','VentaController');
     });
 
     // rutas a donde el administrador puede acceder
@@ -48,6 +49,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('rol','RolController');
         Route:: resource('usuario','UserController');
         Route:: resource('compra','CompraController');
+        Route:: resource('venta','VentaController');
         Route:: get('/pdfCompra/{id}','CompraController@pdf')->name('compra_pdf');
     });
 
