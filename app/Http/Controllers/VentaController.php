@@ -41,15 +41,19 @@ class VentaController extends Controller
     } 
     public function create(){
 
-        // listar los proveedores en la ventana modal
+        // listar los clientes en la ventana modal
         $clientes =DB::table('clientes')->get();
 
         // listar los productos en la ventana modal
         $productos =DB::table('productos as prod')
-        ->select(DB::raw('CONCAT(prod.codigo," ",prod.nombre) as producto'),'prod.id')
-        ->where('prod.condicion','=','1')->get();
+        ->join('detalle_compras as dc','prod.id','=','dc.idproducto')
+        ->select(DB::raw('CONCAT(prod.codigo," ",prod.nombre) as producto'),'prod.id','prod.stock','prod.precio_venta')
+        ->where('prod.condicion','=','1')
+        ->where('prod.stock','>','0')
+        ->groupBy('producto','prod.id','prod.stock')
+        ->get();
 
-        return view('compra.create',["proveedores"=>$proveedores,"productos"=>$productos]);
+        return view('venta.create',["clientes"=>$clientes,"productos"=>$productos]);
     }
 
     public function store(Request $request){
@@ -58,33 +62,35 @@ class VentaController extends Controller
             DB:: beginTransaction();
             $mytime = Carbon::now('America/La_Paz');
 
-            $compra = new Compra();
-            $compra->idproveedor = $request->id_proveedor;
-            $compra->idusuario = \Auth::user()->id;
-            $compra->tipo_identificacion = $request->tipo_identificacion;
-            $compra->num_compra = $request->num_compra;
-            $compra->fecha_compra = $mytime->toDateString();
-            $compra->impuesto = '0.20';
-            $compra->total = $request->total_pagar;
-            $compra->estado = 'Registrado';
-            $compra->save();
+            $venta = new Venta();
+            $venta->idcliente = $request->id_cliente;
+            $venta->idusuario = \Auth::user()->id;
+            $venta->tipo_identificacion = $request->tipo_identificacion;
+            $venta->num_venta = $request->num_venta;
+            $venta->fecha_venta = $mytime->toDateString();
+            $venta->impuesto = '0.20';
+            $venta->total = $request->total_pagar;
+            $venta->estado = 'Registrado';
+            $venta->save();
 
             $id_producto = $request->id_producto;
             $cantidad = $request->cantidad;
-            $precio = $request->precio_compra;
+            $precio = $request->precio_venta;
+            $descuento = $request->descuento;
 
 
 
             // recorro todos los elementos de la
             $cont = 0;
             while($cont < count($id_producto)){
-                $detalle = new DetalleCompra();
+                $detalle = new DetalleVenta();
                 // enviamos valores a los propiedades del objeto 
-                // al idcompra del objeto detalle le enviamos 
-                $detalle->idcompra = $compra->id;
+                // al idventa del objeto detalle le enviamos 
+                $detalle->idventa = $venta->id;
                 $detalle->idproducto = $id_producto[$cont];
                 $detalle->cantidad = $cantidad[$cont];
                 $detalle->precio = $precio[$cont];
+                $detalle->descuento = $descuento[$cont];
                 $detalle->save();
                 $cont++;
             }
@@ -92,7 +98,7 @@ class VentaController extends Controller
         } catch(Exception $e) {
             DB::rollBack();
         }
-        return Redirect::to('compra');
+        return Redirect::to('venta');
     }
 
     public function show($id){
