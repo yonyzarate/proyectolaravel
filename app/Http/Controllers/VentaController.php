@@ -136,31 +136,31 @@ class VentaController extends Controller
     }
 
     public function pdf(Request $request, $id){
-        $compra = DB::table('compras as co')
-        ->join('proveedores as pro','pro.id','=','co.idproveedor')
-        ->join('users as us','us.id','=','co.idusuario')
-        ->join('detalle_compras as dl','co.id','=','dl.idcompra')
-        ->select('co.id','co.tipo_identificacion','co.num_compra','co.created_at',
-        'co.impuesto',DB::raw('sum(dl.cantidad*precio) as total'),
-        'co.estado','pro.nombre','pro.tipo_documento','pro.num_documento',
-        'pro.direccion','pro.email','pro.telefono','us.usuario')
-        ->where('co.id','=',$id)
-        ->orderBy('co.id','desc')
-        ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.created_at',
-        'co.impuesto','co.estado','pro.nombre','pro.tipo_documento','pro.num_documento',
-        'pro.direccion','pro.email','pro.telefono','us.usuario')
+        $venta = DB::table('ventas as ve')
+        ->join('clientes as cl','cl.id','=','ve.idcliente')
+        ->join('users as us','us.id','=','ve.idusuario')
+        ->join('detalle_ventas as dv','ve.id','=','dv.idventa')
+        ->select('ve.id','ve.tipo_identificacion','ve.num_venta','ve.created_at',
+        've.impuesto',DB::raw('sum(dv.cantidad*precio - dv.cantidad*precio*descuento/100) as total'),
+        've.estado','cl.nombre','cl.tipo_documento','cl.num_documento',
+        'cl.direccion','cl.email','cl.telefono','us.usuario')
+        ->where('ve.id','=',$id)
+        ->orderBy('ve.id','desc')
+        ->groupBy('ve.id','ve.tipo_identificacion','ve.num_venta','ve.created_at',
+        've.impuesto','ve.estado','cl.nombre','cl.tipo_documento','cl.num_documento',
+        'cl.direccion','cl.email','cl.telefono','us.usuario')
         ->take(1)->get();
 
-        $detalles = DB::table('detalle_compras as dl')
-        ->join('productos as prod','prod.id','=','dl.idproducto')
-        ->select('dl.cantidad','dl.precio','prod.nombre as producto')
-        ->where('dl.idcompra','=',$id)
-        ->orderBy('dl.id','desc')->get();
+        $detalles = DB::table('detalle_ventas as dv')
+        ->join('productos as prod','prod.id','=','dv.idproducto')
+        ->select('dv.cantidad','dv.precio','dv.descuento','prod.nombre as producto')
+        ->where('dv.idventa','=',$id)
+        ->orderBy('dv.id','desc')->get();
 
-        $numcompra =Compra::select('num_compra')->where('id',$id)->get();
+        $numventa =Venta::select('num_venta')->where('id',$id)->get();
 
-        $pdf = \PDF::loadView('pdf.compra',['compra'=>$compra,'detalles'=>$detalles]);
-        return $pdf->download('compra-'.$numcompra[0]->num_compra.'.pdf');
+        $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
+        return $pdf->download('venta-'.$numventa[0]->num_venta.'.pdf');
         
         
 
