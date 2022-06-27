@@ -31,6 +31,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('proveedor','ProveedorController');
         Route:: resource('compra','CompraController');
         Route:: get('/pdfCompra/{id}','CompraController@pdf')->name('compra_pdf');
+        Route:: get('/listarProductoPdf','ProductoController@listarPdf')->name('producto_pdf');
+
     });
 
     // rutas a donde el vendedor puede acceder
@@ -40,6 +42,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('cliente','ClienteController');
         Route:: resource('venta','VentaController');
         Route:: get('/pdfVenta/{id}','VentaController@pdf')->name('venta_pdf');
+        Route:: get('/listarProductoPdf','ProductoController@listarPdf')->name('producto_pdf');
     });
 
     // rutas a donde el administrador puede acceder
@@ -54,6 +57,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route:: resource('venta','VentaController');
         Route:: get('/pdfCompra/{id}','CompraController@pdf')->name('compra_pdf');
         Route:: get('/pdfVenta/{id}','VentaController@pdf')->name('venta_pdf');
+        Route:: get('/listarProductoPdf','ProductoController@listarPdf')->name('producto_pdf');
+
     });
 
     

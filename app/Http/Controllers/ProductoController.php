@@ -127,4 +127,18 @@ class ProductoController extends Controller
             return Redirect::to("producto");
         }
     }
+
+    public function listarPdf(){
+        $productos =DB::table('productos as pro')
+        ->join('categorias as cat','pro.idcategoria','=','cat.id')
+        // ->join('categorias as c', 'p.idcategoria','=','c.id')
+        ->select('pro.id','pro.idcategoria','pro.codigo','pro.nombre',
+        'pro.precio_venta','pro.stock','pro.condicion','cat.nombre as categoria')
+        ->orderBy('pro.nombre','desc')->get();
+
+        $cont=Producto::count();
+        $pdf = \PDF::loadView('pdf.productopdf',['productos'=>$productos,'cont'=>$cont]);
+        return $pdf->download('productos.pdf');
+
+    }
 }

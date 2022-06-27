@@ -16,6 +16,12 @@
                 <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#abrirmodal">
                     <i class="fa fa-plus fa-2x"></i>&nbsp;&nbsp;Agregar producto
                 </button>
+
+                <a href="{{url('listarProductoPdf')}}" target="_blank">
+                    <button type="button" class="btn btn-success btn-lg">
+                        <i class="fa fa-file fa-2x"></i>&nbsp;&nbsp;Reporte PDF
+                    </button> &nbsp;
+                </a>
             </div>
             <div class="card-body">
                 <div class="form-group row">
