@@ -105,24 +105,24 @@ class VentaController extends Controller
 
 
 
-        $compra = DB::table('compras as co')
-        ->join('proveedores as pro','pro.id','=','co.idproveedor')
-        ->join('detalle_compras as dc','co.id','=','dc.idcompra')
-        ->select('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
-        'co.impuesto','co.estado',DB::raw('sum(dc.cantidad*precio) as total'),'pro.nombre')
-        ->where('co.id','=',$id)
-        ->orderby('co.id','desc')
-        ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
-        'co.impuesto','co.estado','pro.nombre')
+        $venta = DB::table('ventas as ve')
+        ->join('clientes as cl','cl.id','=','ve.idcliente')
+        ->join('detalle_ventas as dv','ve.id','=','dv.idventa')
+        ->select('ve.id','ve.tipo_identificacion','ve.num_venta','ve.fecha_venta',
+        've.impuesto','ve.estado',DB::raw('sum(dv.cantidad*precio - dv.cantidad*precio*descuento/100) as total'),'cl.nombre')
+        ->where('ve.id','=',$id)
+        ->orderby('ve.id','desc')
+        ->groupBy('ve.id','ve.tipo_identificacion','ve.num_venta','ve.fecha_venta',
+        've.impuesto','ve.estado','cl.nombre')
         ->first();
 
         // mostrar detalles de
-        $detalles = DB::table('detalle_compras as dc')
-        ->join('productos as prod','prod.id','=','dc.idproducto')
-        ->select('dc.cantidad','dc.precio','prod.nombre as producto')
-        ->where('dc.idcompra','=',$id)
-        ->orderBy('dc.id','desc')->get();
-        return view('venta.show',['compra'=>$compra,'detalles'=>$detalles]);
+        $detalles = DB::table('detalle_ventas as dv')
+        ->join('productos as prod','prod.id','=','dv.idproducto')
+        ->select('dv.cantidad','dv.precio','dv.descuento','prod.nombre as producto')
+        ->where('dv.idventa','=',$id)
+        ->orderBy('dv.id','desc')->get();
+        return view('venta.show',['venta'=>$venta,'detalles'=>$detalles]);
         
     }
 
