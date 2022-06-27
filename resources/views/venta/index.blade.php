@@ -83,7 +83,7 @@
                             <td>
                                 @if ($vent->estado=="Registrado")
                                     <button type="button" class="btn btn-danger btn-sm"
-                                        data-id_compra="{{$vent->id}}" data-toggle="modal"
+                                        data-id_venta="{{$vent->id}}" data-toggle="modal"
                                         data-target="#CambiarEstadoVenta">
                                         <i class="fa fa-times fa-2x"></i> Anular Venta
                                     </button>

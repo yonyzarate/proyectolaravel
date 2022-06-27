@@ -122,16 +122,16 @@ class VentaController extends Controller
         ->select('dc.cantidad','dc.precio','prod.nombre as producto')
         ->where('dc.idcompra','=',$id)
         ->orderBy('dc.id','desc')->get();
-        return view('compra.show',['compra'=>$compra,'detalles'=>$detalles]);
+        return view('venta.show',['compra'=>$compra,'detalles'=>$detalles]);
         
     }
 
     public function destroy(request $request){
 
-        $compra = Compra:: findOrFail($request->id_compra);
-        $compra-> estado = 'Anulado';
-        $compra-> save();
-        return Redirect::to('compra');
+        $venta = Venta:: findOrFail($request->id_venta);
+        $venta-> estado = 'Anulado';
+        $venta-> save();
+        return Redirect::to('venta');
 
     }
 

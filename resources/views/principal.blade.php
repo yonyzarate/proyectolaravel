@@ -245,6 +245,16 @@
             modal.find('.modal-body #id_compra').val(id_compra);
         })
 
+           // INICIO ventana modal para cambiar estado de la venta 
+           $('#CambiarEstadoVenta').on('show.bs.modal', function(event){
+            var button = $(event.relatedTarget)
+            var id_venta = button.data('id_venta')
+            var modal = $(this)
+
+            modal.find('.modal-body #id_venta').val(id_venta);
+        })
+        // Fin ventana modal para cambiar el estado de la venta
+
 
 
 

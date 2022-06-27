@@ -42,9 +42,12 @@
                         {{csrf_field()}}
                         </form>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-suitcase"></i> Ventas</a>
+                        <a class="nav-link" href="{{url('venta')}}" onclick="event.preventDefault();
+                        document.getElementById('venta-form').submit();"><i class="fa fa-suitcase"></i> Ventas</a>
+                        <form id="venta-form" action="{{url('venta')}}" method="GET" style="display: none;">
+                        {{csrf_field()}}
+                        </form>
                     </li>
 
                     <li class="nav-item">
