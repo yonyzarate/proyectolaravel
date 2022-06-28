@@ -30,7 +30,7 @@ class CompraController extends Controller
             ->orderby('co.id','desc')
             ->groupBy('co.id','co.tipo_identificacion','co.num_compra','co.fecha_compra',
             'co.impuesto','co.estado','co.total','pro.nombre','us.nombre')
-            ->paginate(1);
+            ->paginate(8);
             
             // /* listar las carateristicas en ventana modal*/
             // $categorias = DB::table('categorias')

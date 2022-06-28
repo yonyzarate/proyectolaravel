@@ -7,7 +7,7 @@
  <div class="card-body">
 
   <h2 class="text-center">Detalle de Venta</h2><br/><br/><br/>
-
+    
     
             <div class="form-group row">
 
@@ -34,7 +34,7 @@
                     </div>
 
             </div>
-
+ 
             
             <br/><br/>
 
