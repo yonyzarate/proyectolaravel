@@ -72,8 +72,8 @@
     </div>   
 
     <footer class="app-footer">
-        <span><a href="http://www.webtraining-it.com/">webtraining-it.com</a> &copy; 2019</span>
-        <span class="ml-auto">Desarrollado por <a href="http://www.webtraining-it.com/">webtraining-it.com</a></span>
+        <span><a href="#">sistema-ventas-laravel</a> &copy; 2022</span>
+        <span class="ml-auto">Desarrollado por yony zarate Paco <a href="https://yonyzarate.github.io/Portafolio-cv/">https://yonyzarate.github.io/Portafolio-cv/</a></span>
     </footer>
 
     <!-- Bootstrap and necessary plugins -->
